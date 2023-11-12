@@ -6,6 +6,8 @@ class Validator {
 
     fun checkDate(day: Int) = day in validBookingDay
 
+    fun isNum(input: String) = input.toIntOrNull() != null
+
     companion object {
         private var instance: Validator? = null
 

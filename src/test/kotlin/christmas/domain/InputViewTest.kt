@@ -87,7 +87,7 @@ class InputViewTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["시저샐러드ㅡ1,티본스테이크ㅡ1", "시저샐러드 1,티본스테이크 1", "시저샐러드-,티본스테이크-", "시저샐러드--,티본스테이크--"])
+    @ValueSource(strings = ["시저샐러드ㅡ1,티본스테이크ㅡ1", "시저샐러드 1,티본스테이크 1", "시저샐러드-,티본스테이크-", "시저샐러드--,티본스테이크--", " ", "\n"])
     @DisplayName("InputView : readMenu - fail(입력 포맷)")
     fun `포맷과 다르게 메뉴를 입력한 경우 에러를 반환한다`(input: String) {
         // given

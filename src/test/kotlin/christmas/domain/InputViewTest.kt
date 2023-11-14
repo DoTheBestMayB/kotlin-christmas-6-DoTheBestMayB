@@ -235,7 +235,7 @@ class InputViewTest {
                 hashMapOf(
                     Menu(MENU_TYPE.APPETIZER, "양송이수프", 6000) to 5,
                     Menu(MENU_TYPE.MAIN, "티본스테이크", 55_000) to 3,
-                    Menu(MENU_TYPE.MAIN, "바비큐립", 35_000) to 2,
+                    Menu(MENU_TYPE.MAIN, "바비큐립", 54_000) to 2,
                     Menu(MENU_TYPE.DRINK, "레드와인", 60_000) to 1,
                     Menu(MENU_TYPE.DESSERT, "초코케이크", 15_000) to 1,
                     Menu(MENU_TYPE.DESSERT, "아이스크림", 5_000) to 1,

@@ -1,5 +1,17 @@
 package christmas
 
+import christmas.domain.*
+
 fun main() {
-    TODO("프로그램 구현")
+    val planner = createPlanner()
+    planner.startPlan()
+}
+
+private fun createPlanner(): Planner {
+    val outputView = OutputView()
+    val inputView = InputView(outputView, Validator.getInstance())
+    val menuManager = MenuManager()
+    val eventManager = EventManager(menuManager)
+    val pos = Pos(eventManager)
+    return Planner(outputView, inputView, pos, menuManager)
 }

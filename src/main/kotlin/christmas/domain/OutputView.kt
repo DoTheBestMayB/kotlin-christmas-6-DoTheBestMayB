@@ -14,7 +14,11 @@ class OutputView {
 
     fun show(day: Int, receipt: Receipt) {
         show("12월 ${day}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", true)
+        show(EMPTY_TEXT_FOR_LINE_BREAK, true)
+        show(receipt.toString(), false)
+    }
 
-        show(receipt.toString(), true)
+    companion object {
+        private const val EMPTY_TEXT_FOR_LINE_BREAK = ""
     }
 }

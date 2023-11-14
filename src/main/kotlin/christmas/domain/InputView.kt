@@ -72,7 +72,7 @@ class InputView(
         private const val ORDER_INPUT_SPLITTER = ","
         private const val REQUEST_INPUT_VISIT_DAY = "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)"
         private const val REQUEST_INPUT_MENU = "주문하실 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)"
-        private const val VISIT_DAY_IS_NOT_VALID = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요."
+        const val VISIT_DAY_IS_NOT_VALID = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요."
         const val ORDER_IS_NOT_VALID = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
         const val ORDER_SIZE_IS_OVER = "[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다."
         const val DRINK_ONLY_ORDER_IS_NOT_ALLOWED = "[ERROR] 음료만 주문 시, 주문할 수 없습니다."

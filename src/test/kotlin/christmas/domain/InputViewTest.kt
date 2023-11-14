@@ -34,6 +34,59 @@ class InputViewTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = ["일","1일","삼","\n"," "])
+    @DisplayName("InputView : readDate - fail(숫자가 아닌 값 입력)")
+    fun `방문할 날짜로 숫자가 아닌 값을 입력하면 에러를 반환한다`(input: String) {
+        // given
+        setInput(input)
+
+        // when
+        val actual = assertThrows(NumberFormatException::class.java) {
+            inputView.readDate()
+        }
+
+        // then
+        val expectedClass = NumberFormatException::class.java
+        val expectedErrorMessage = InputView.VISIT_DAY_IS_NOT_VALID
+        Assertions.assertThat(actual).isInstanceOf(expectedClass)
+        Assertions.assertThat(actual).hasMessageContaining(expectedErrorMessage)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["0", "32", "-1", "-9999", "99", "9999"])
+    @DisplayName("InputView : readDate - fail(숫자 범위 일치하지 않는 경우)")
+    fun `방문할 날짜로 1이상 31 이하가 아닌 숫자를 입력하면 에러를 반환한다`(input: String) {
+        // given
+        setInput(input)
+
+        // when
+        val actual = assertThrows(IllegalArgumentException::class.java) {
+            inputView.readDate()
+        }
+
+        // then
+        val expectedClass = IllegalArgumentException::class.java
+        val expectedErrorMessage = InputView.VISIT_DAY_IS_NOT_VALID
+        Assertions.assertThat(actual).isInstanceOf(expectedClass)
+        Assertions.assertThat(actual).hasMessageContaining(expectedErrorMessage)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["1", "2", "15", "31"])
+    @DisplayName("InputView : readDate - success")
+    fun `방문할 날짜로 1이상 31 이하인 숫자를 입력하면 해당 숫자를 반환한다`(input: String) {
+        // given
+        setInput(input)
+
+        // when
+        val actual = inputView.readDate()
+
+        // then
+        val expected = input.toInt()
+        Assertions.assertThat(actual).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = ["시저샐러드ㅡ1,티본스테이크ㅡ1", "시저샐러드 1,티본스테이크 1", "시저샐러드-,티본스테이크-", "시저샐러드--,티본스테이크--"])
     @DisplayName("InputView : readMenu - fail(입력 포맷)")
     fun `포맷과 다르게 메뉴를 입력한 경우 에러를 반환한다`(input: String) {

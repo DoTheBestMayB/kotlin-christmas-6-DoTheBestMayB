@@ -3,27 +3,23 @@ package christmas.domain
 import christmas.util.RetryStrategy
 
 class Planner(
+    private val outputView: OutputView,
     private val inputView: InputView,
     private val pos: Pos,
-    private val chef: Chef,
+    private val menuManager: MenuManager,
 ): RetryStrategy() {
 
-    init {
-        registerMenuToPos()
-    }
 
     fun startPlan() {
         val day = askVisitDay()
-        val menu = askMenu()
+        val orderTicket = askMenu()
+        val receipt = pos.register(orderTicket, day)
+
+        outputView.show(day, receipt)
     }
 
     private fun askVisitDay() = doUntilSuccess { inputView.readDate() }
 
-    private fun askMenu() = doUntilSuccess { inputView.readMenu(chef) }
+    private fun askMenu() = doUntilSuccess { inputView.readMenu(menuManager) }
 
-    private fun registerMenuToPos() {
-        for (menu in chef.getAllAvailableMenu()) {
-            pos.register(menu)
-        }
-    }
 }

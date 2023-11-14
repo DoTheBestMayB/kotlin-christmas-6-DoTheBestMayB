@@ -22,13 +22,13 @@ class InputView(
         return input.toInt()
     }
 
-    fun readMenu(chef: Chef): OrderTicket {
+    fun readMenu(menuManager: MenuManager): OrderTicket {
         outputView.show(REQUEST_INPUT_MENU, true)
         val input = read()
-        return changeInputToMenu(input, chef)
+        return changeInputToMenu(input, menuManager)
     }
 
-    private fun changeInputToMenu(input: String, chef: Chef): OrderTicket {
+    private fun changeInputToMenu(input: String, menuManager: MenuManager): OrderTicket {
         val orderedMenu = hashMapOf<Menu, Int>()
         var isNotOnlyDrink = false
 
@@ -40,7 +40,7 @@ class InputView(
 
             checkValidity(size + orderedMenu.values.sum(), ORDER_SIZE_IS_OVER) { validator.checkTotalOrderSize(it) }
 
-            val menu = requireNotNull(chef.getMenu(name)) {
+            val menu = requireNotNull(menuManager.getMenu(name)) {
                 ORDER_IS_NOT_VALID
             }
             if (menu in orderedMenu) {

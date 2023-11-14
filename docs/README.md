@@ -8,7 +8,7 @@
 - [x] 조리 가능한 메뉴를 관리하는 MenuManager 클래스를 만든다.
 - [ ] Pos(포스기) 클래스를 만든다.
   - [x] 구매 가능한 메뉴를 등록한다.
-  - [ ] 주문 정보를 입력하면 영수증인 Receipt을 반환한다.
+  - [x] 주문 정보를 입력하면 영수증인 Receipt을 반환한다.
 - [ ] 데이터 검증을 담당하는 Validator 클래스를 만든다.
   - [x] 입력한 방문 날짜가 유효한지 검증하는 함수를 만든다.
   - [x] 입력한 주문이 유효한지 검증하는 함수를 만든다.
@@ -20,14 +20,14 @@
 - [x] Exception이 발생해도 입력받은 함수를 다시 실행하는 함수를 가진 RetryStrategy 클래스를 만든다. 
 - [x] 이벤트 배지를 나타내는 BADGE Enum 클래스를 만든다.
 - [ ] 이벤트 정보를 나타내는 Event 데이터 클래스를 만든다.
-- [ ] 진행 중인 이벤트를 관리하는 EventManager 클래스를 만든다.
+- [x] 진행 중인 이벤트를 관리하는 EventManager 클래스를 만든다.
 - [x] 할인 정보를 나타내는 Benefit 데이터 클래스를 만든다.
   - 이벤트 이름, 할인 가격 2개의 파라미터로 구성되어 있다.
 - [ ] 예약을 받고 관리하는 Planner 클래스를 만든다.
   - [x] 손님에게 방문 날짜를 물어본다.
   - [x] 손님에게 메뉴를 물어본다.
-  - [ ] 손님에게 예약 내역을 보여준다.
-- [ ] 예약 내역을 나타내는 영수증 Receipt 데이터 클래스를 만든다.
+  - [x] 손님에게 예약 내역을 보여준다.
+- [x] 예약 내역을 나타내는 영수증 Receipt 데이터 클래스를 만든다.
 - [ ] 입출력 값이 동일한지 테스트코드 작성하기
 - ~~날짜를 나타내는 Date 데이터 클래스를 만든다.~~
   - ~~날짜를 어떻게 관리해야 할까? 요구사항은 12월만 있으므로, 12월에 대한 객체를 직접 만들까? 혹은 내장 라이브러리를 사용해서 구현해야 할까?~~
@@ -112,10 +112,10 @@ parameter: type: MENU_TYPE, name: String, price: Int
 
 ### Receipt 데이터 클래스 구현 세부사항
 ```text
-orderMenu: List<MENU>, 
-originalTotalPrice: String,
-GiftMenu: Menu?,
-appliedEvent: List<Benefit>,
+orderMenu: HashMap<Menu, Int>,
+originalTotalPrice: Int,
+gift: Gift?,
+benefits: List<Benefit>,
 totalBenefitPrice: Int,
 grandTotal: Int,
 badge: BADGE,

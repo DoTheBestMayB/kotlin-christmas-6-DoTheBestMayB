@@ -30,4 +30,10 @@ class Chef {
     )
 
     fun getAllAvailableMenu() = appetizerMenu + mainMenu + dessertMenu + drinkMenu
+
+    fun getMenu(menuName: String): Menu? {
+        return getAllAvailableMenu().firstOrNull {
+            it.name == menuName
+        }
+    }
 }

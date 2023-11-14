@@ -14,9 +14,12 @@ class Planner(
 
     fun startPlan() {
         val day = askVisitDay()
+        val menu = askMenu()
     }
 
     private fun askVisitDay() = doUntilSuccess { inputView.readDate() }
+
+    private fun askMenu() = doUntilSuccess { inputView.readMenu(chef) }
 
     private fun registerMenuToPos() {
         for (menu in chef.getAllAvailableMenu()) {

@@ -1,6 +1,6 @@
 package christmas.domain
 
-class Validator {
+class Validator private constructor() {
 
     private val validBookingDay = 1..31
 

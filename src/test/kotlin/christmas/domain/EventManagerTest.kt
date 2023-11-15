@@ -112,6 +112,30 @@ class EventManagerTest {
         assertThat(actual).isEqualTo(expected)
     }
 
+    @ParameterizedTest
+    @MethodSource("createCanApplyEventValueTrue")
+    @DisplayName("EventManager : canApplyEvent - apply")
+    fun `총주문 금액이 1만 원 이상이면 이벤트 적용이 가능하다`(orderTicket: OrderTicket) {
+        // when
+        val actual = eventManager.canApplyEvent(orderTicket)
+
+        // then
+        val expected = true
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource("createCanApplyEventValueFalse")
+    @DisplayName("EventManager : canApplyEvent - no apply")
+    fun `총주문 금액이 1만 원 미만이면 이벤트 적용이 불가능하다`(orderTicket: OrderTicket) {
+        // when
+        val actual = eventManager.canApplyEvent(orderTicket)
+
+        // then
+        val expected = false
+        assertThat(actual).isEqualTo(expected)
+    }
+
     companion object {
         private const val CHRISTMAS_D_DAY_DISCOUNT = "크리스마스 디데이 할인"
         private const val WEEK_DISCOUNT = "평일 할인"
@@ -233,6 +257,68 @@ class EventManagerTest {
                         Menu.from("크리스마스파스타")!! to 1,
                     )
                 ) to Gift(GIFT_EVENT, Menu.from(GIFT_MENU_NAME)!!, GIFT_AMOUNT),
+            )
+        }
+
+        @JvmStatic
+        fun createCanApplyEventValueTrue(): List<OrderTicket> {
+            return listOf(
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("아이스크림")!! to 2,
+                    )
+                ),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("아이스크림")!! to 1,
+                        Menu.from("제로콜라")!! to 2,
+                    )
+                ),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("타파스")!! to 2,
+                    )
+                ),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("티본스테이크")!! to 4,
+                        Menu.from("초코케이크")!! to 2,
+                    )
+                ),
+            )
+        }
+
+        @JvmStatic
+        fun createCanApplyEventValueFalse(): List<OrderTicket> {
+            return listOf(
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("아이스크림")!! to 1,
+                    )
+                ),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("아이스크림")!! to 1,
+                        Menu.from("제로콜라")!! to 1,
+                    )
+                ),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("양송이수프")!! to 1,
+                        Menu.from("제로콜라")!! to 1,
+                    )
+                ),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("타파스")!! to 1,
+                        Menu.from("제로콜라")!! to 1,
+                    )
+                ),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("시저샐러드")!! to 1,
+                    )
+                ),
             )
         }
     }

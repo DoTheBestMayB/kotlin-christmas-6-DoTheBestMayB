@@ -5,9 +5,10 @@ import christmas.data.*
 class EventManager {
 
     private val specialDiscountDay = listOf(3, 10, 17, 24, 25, 31)
+    private val rangeOfChristmasDiscountDay = 1..25
 
     fun checkChristmasDiscount(date: Int): Benefit? {
-        if (date > LAST_DAY_OF_CHRISTMAS_D_DAY_DISCOUNT) {
+        if (date !in rangeOfChristmasDiscountDay) {
             return null
         }
         val discountAmount =
@@ -60,7 +61,6 @@ class EventManager {
         private const val CHRISTMAS_D_DAY_DEFAULT_DISCOUNT = 1_000
         private const val CHRISTMAS_D_DAY_DISCOUNT_UNIT = 100
         private const val CHRISTMAS_D_DAY_DISCOUNT_DAY_CORRECTION_VALUE = 1
-        private const val LAST_DAY_OF_CHRISTMAS_D_DAY_DISCOUNT = 25
         private const val GIFT_MENU_NAME = "샴페인"
         private const val GIFT_AMOUNT = 1
         private const val GIFT_MENU_NO_EXIST = "[ERROR] 기프트 메뉴가 현재 판매 중이지 않습니다."

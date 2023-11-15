@@ -4,8 +4,6 @@ import christmas.data.*
 
 class Pos {
 
-    private val receipts = mutableListOf<Receipt>()
-
     fun createReceipt(
         orderTicket: OrderTicket,
         priceDiscounts: List<Benefit>,
@@ -23,8 +21,6 @@ class Pos {
             totalBenefitPrice = totalBenefitPrice,
             grandTotal = orderTicket.totalOrderPrice() - priceDiscounts.sumOf { it.discountAmount },
             badge = Badge.from(totalBenefitPrice)
-        ).also {
-            receipts.add(it)
-        }
+        )
     }
 }

@@ -1,6 +1,7 @@
 package christmas.domain
 
 import christmas.data.Benefit
+import christmas.data.Gift
 import christmas.data.Menu
 import christmas.data.OrderTicket
 import org.assertj.core.api.Assertions.assertThat
@@ -98,11 +99,27 @@ class EventManagerTest {
         assertThat(actual).isEqualTo(expected)
     }
 
+    @ParameterizedTest
+    @MethodSource("createCheckSpecialDiscountValue")
+    @DisplayName("EventManager : checkSpecialDiscount - apply&no apply")
+    fun `구매 금액이 최소 금액 이상인지 아닌지에 따라 증정 이벤트의 증정품을 받을 수 있다`(data: Pair<OrderTicket, Gift?>) {
+        // given
+        val (orderTicket, expected) = data
+        // when
+        val actual = eventManager.checkAvailableGifts(orderTicket)
+
+        // then
+        assertThat(actual).isEqualTo(expected)
+    }
+
     companion object {
         private const val CHRISTMAS_D_DAY_DISCOUNT = "크리스마스 디데이 할인"
         private const val WEEK_DISCOUNT = "평일 할인"
         private const val WEEKEND_DISCOUNT = "주말 할인"
         private const val SPECIAL_DISCOUNT = "특별 할인"
+        private const val GIFT_MENU_NAME = "샴페인"
+        private const val GIFT_AMOUNT = 1
+        private const val GIFT_EVENT = "증정 이벤트"
         private const val WEEK_DISCOUNT_UNIT = 2023
         private const val WEEKEND_DISCOUNT_UNIT = 2023
         private const val AMOUNT_OF_SPECIAL_DISCOUNT = 1_000
@@ -181,6 +198,41 @@ class EventManagerTest {
                         Menu.from("크리스마스파스타")!! to 1,
                     )
                 ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 8),
+            )
+        }
+
+        @JvmStatic
+        fun createCheckSpecialDiscountValue(): List<Pair<OrderTicket, Gift?>> {
+            return listOf(
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("티본스테이크")!! to 2,
+                        Menu.from("제로콜라")!! to 3,
+                    )
+                ) to null,
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("아이스크림")!! to 20,
+                    )
+                ) to null,
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("티본스테이크")!! to 2,
+                        Menu.from("제로콜라")!! to 4,
+                    )
+                ) to Gift(GIFT_EVENT, Menu.from(GIFT_MENU_NAME)!!, GIFT_AMOUNT),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("초코케이크")!! to 8,
+                    )
+                ) to Gift(GIFT_EVENT, Menu.from(GIFT_MENU_NAME)!!, GIFT_AMOUNT),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("아이스크림")!! to 10,
+                        Menu.from("양송이수프")!! to 9,
+                        Menu.from("크리스마스파스타")!! to 1,
+                    )
+                ) to Gift(GIFT_EVENT, Menu.from(GIFT_MENU_NAME)!!, GIFT_AMOUNT),
             )
         }
     }

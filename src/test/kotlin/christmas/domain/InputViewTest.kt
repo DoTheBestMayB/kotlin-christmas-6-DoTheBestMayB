@@ -1,10 +1,9 @@
 package christmas.domain
 
 import camp.nextstep.edu.missionutils.Console
-import christmas.data.MenuType
 import christmas.data.Menu
 import christmas.data.OrderTicket
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
@@ -47,8 +46,8 @@ class InputViewTest {
         // then
         val expectedClass = NumberFormatException::class.java
         val expectedErrorMessage = InputView.VISIT_DAY_IS_NOT_VALID
-        Assertions.assertThat(actual).isInstanceOf(expectedClass)
-        Assertions.assertThat(actual).hasMessageContaining(expectedErrorMessage)
+        assertThat(actual).isInstanceOf(expectedClass)
+        assertThat(actual).hasMessageContaining(expectedErrorMessage)
     }
 
     @ParameterizedTest
@@ -66,8 +65,8 @@ class InputViewTest {
         // then
         val expectedClass = IllegalArgumentException::class.java
         val expectedErrorMessage = InputView.VISIT_DAY_IS_NOT_VALID
-        Assertions.assertThat(actual).isInstanceOf(expectedClass)
-        Assertions.assertThat(actual).hasMessageContaining(expectedErrorMessage)
+        assertThat(actual).isInstanceOf(expectedClass)
+        assertThat(actual).hasMessageContaining(expectedErrorMessage)
     }
 
     @ParameterizedTest
@@ -82,7 +81,7 @@ class InputViewTest {
 
         // then
         val expected = input.toInt()
-        Assertions.assertThat(actual).isEqualTo(expected)
+        assertThat(actual).isEqualTo(expected)
     }
 
     @ParameterizedTest
@@ -99,8 +98,8 @@ class InputViewTest {
         // then
         val expectedClass = IllegalArgumentException::class.java
         val expectedErrorMessage = InputView.ORDER_IS_NOT_VALID
-        Assertions.assertThat(actual).isInstanceOf(expectedClass)
-        Assertions.assertThat(actual).hasMessageContaining(expectedErrorMessage)
+        assertThat(actual).isInstanceOf(expectedClass)
+        assertThat(actual).hasMessageContaining(expectedErrorMessage)
     }
 
     @ParameterizedTest
@@ -117,8 +116,8 @@ class InputViewTest {
         // then
         val expectedClass = IllegalArgumentException::class.java
         val expectedErrorMessage = InputView.ORDER_IS_NOT_VALID
-        Assertions.assertThat(actual).isInstanceOf(expectedClass)
-        Assertions.assertThat(actual).hasMessageContaining(expectedErrorMessage)
+        assertThat(actual).isInstanceOf(expectedClass)
+        assertThat(actual).hasMessageContaining(expectedErrorMessage)
     }
 
     @ParameterizedTest
@@ -134,9 +133,9 @@ class InputViewTest {
         }
         // then
         val expectedClass = IllegalArgumentException::class.java
-        val expectedErrorMessage = InputView.ORDER_SIZE_IS_OVER
-        Assertions.assertThat(actual).isInstanceOf(expectedClass)
-        Assertions.assertThat(actual).hasMessageContaining(expectedErrorMessage)
+        val expectedErrorMessage = Validator.ORDER_SIZE_IS_OVER
+        assertThat(actual).isInstanceOf(expectedClass)
+        assertThat(actual).hasMessageContaining(expectedErrorMessage)
     }
 
     @ParameterizedTest
@@ -153,8 +152,8 @@ class InputViewTest {
         // then
         val expectedClass = IllegalArgumentException::class.java
         val expectedErrorMessage = InputView.ORDER_IS_NOT_VALID
-        Assertions.assertThat(actual).isInstanceOf(expectedClass)
-        Assertions.assertThat(actual).hasMessageContaining(expectedErrorMessage)
+        assertThat(actual).isInstanceOf(expectedClass)
+        assertThat(actual).hasMessageContaining(expectedErrorMessage)
     }
 
     @ParameterizedTest
@@ -171,8 +170,8 @@ class InputViewTest {
         // then
         val expectedClass = IllegalArgumentException::class.java
         val expectedErrorMessage = InputView.ORDER_IS_NOT_VALID
-        Assertions.assertThat(actual).isInstanceOf(expectedClass)
-        Assertions.assertThat(actual).hasMessageContaining(expectedErrorMessage)
+        assertThat(actual).isInstanceOf(expectedClass)
+        assertThat(actual).hasMessageContaining(expectedErrorMessage)
     }
 
     @ParameterizedTest
@@ -189,8 +188,8 @@ class InputViewTest {
         // then
         val expectedClass = IllegalArgumentException::class.java
         val expectedErrorMessage = InputView.DRINK_ONLY_ORDER_IS_NOT_ALLOWED
-        Assertions.assertThat(actual).isInstanceOf(expectedClass)
-        Assertions.assertThat(actual).hasMessageContaining(expectedErrorMessage)
+        assertThat(actual).isInstanceOf(expectedClass)
+        assertThat(actual).hasMessageContaining(expectedErrorMessage)
     }
 
     @ParameterizedTest
@@ -205,7 +204,7 @@ class InputViewTest {
         val actual = inputView.readMenu()
 
         // then
-        Assertions.assertThat(actual).isEqualTo(expected)
+        assertThat(actual).isEqualTo(expected)
     }
 
     private fun setInput(input: String) {

@@ -7,15 +7,19 @@ open class RetryStrategy {
             try {
                 return operation()
             } catch (e: NoSuchElementException) {
-                if (e.message?.contains(NO_INPUT) == true) {
-                    throw e
-                }
+                throwExceptionIfCausedByNoInput(e)
                 val errorMessage = e.message ?: "[ERROR] ${e.stackTraceToString()}"
                 println(errorMessage)
             } catch (e: Exception) {
                 val errorMessage = e.message ?: "[ERROR] ${e.stackTraceToString()}"
                 println(errorMessage)
             }
+        }
+    }
+
+    private fun throwExceptionIfCausedByNoInput(e: NoSuchElementException) {
+        if (e.message?.contains(NO_INPUT) == true) {
+            throw e
         }
     }
 

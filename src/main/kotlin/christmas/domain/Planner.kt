@@ -37,10 +37,17 @@ class Planner(
         return listOfNotNull(christmasDiscount, dayDiscount, specialDiscount)
     }
 
-    private fun checkDayDiscount(orderTicket: OrderTicket, date: Int) = when (LocalDate.of(2023, 12, date).dayOfWeek) {
-        DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY -> eventManager.checkWeekDiscount(
-            orderTicket
-        )
-        DayOfWeek.FRIDAY, DayOfWeek.SATURDAY -> eventManager.checkWeekendDiscount(orderTicket)
+    private fun checkDayDiscount(orderTicket: OrderTicket, date: Int) =
+        when (LocalDate.of(YEAR_OF_EVENT, MONTH_OF_EVENT, date).dayOfWeek) {
+            DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY -> eventManager.checkWeekDiscount(
+                orderTicket
+            )
+
+            DayOfWeek.FRIDAY, DayOfWeek.SATURDAY -> eventManager.checkWeekendDiscount(orderTicket)
+        }
+
+    companion object {
+        private const val YEAR_OF_EVENT = 2023
+        private const val MONTH_OF_EVENT = 12
     }
 }

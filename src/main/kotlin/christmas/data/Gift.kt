@@ -8,5 +8,5 @@ data class Gift(
 
     fun getDiscountAmount() = menu.price * size
 
-    fun asMenuAndSize() = "${menu.koreanName} ${size}개"
+    override fun toString() = "${menu.koreanName} ${size}개"
 }

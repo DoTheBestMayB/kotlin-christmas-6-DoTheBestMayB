@@ -38,7 +38,7 @@ data class Receipt(
 
     private fun makeOriginalTotalPriceSentence() = priceFormat.format(originalTotalPrice)
 
-    private fun makeGiftSentence() = gift?.asMenuAndSize() ?: "없음"
+    private fun makeGiftSentence() = gift ?: "없음"
 
     private fun makeBenefitSentence(): String {
         if (benefits.isEmpty()) {

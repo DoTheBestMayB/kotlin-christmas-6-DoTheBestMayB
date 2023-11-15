@@ -35,7 +35,7 @@ data class Receipt(
     private fun makeOrderMenuSentence(): String {
         var sentence = ""
         for ((menu, size) in orderMenu) {
-            sentence += "$LINE_SEPARATOR${menu.name} ${size}개"
+            sentence += "$LINE_SEPARATOR${menu.koreanName} ${size}개"
         }
         return sentence
     }

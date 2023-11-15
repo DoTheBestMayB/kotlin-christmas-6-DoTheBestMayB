@@ -16,29 +16,19 @@ class EventManager {
     }
 
     fun checkWeekDiscount(orderTicket: OrderTicket): Benefit? {
-        var totalCount = 0
-        for ((menu, size) in orderTicket.orderedMenu) {
-            if (menu.type == MenuType.DESSERT) {
-                totalCount += WEEK_DISCOUNT_UNIT * size
-            }
-        }
-        if (totalCount == 0) {
+        val totalDiscount = orderTicket.totalDiscountAs(MenuType.DESSERT, WEEK_DISCOUNT_UNIT)
+        if (totalDiscount == 0) {
             return null
         }
-        return Benefit(WEEK_DISCOUNT, totalCount)
+        return Benefit(WEEK_DISCOUNT, totalDiscount)
     }
 
     fun checkWeekendDiscount(orderTicket: OrderTicket): Benefit? {
-        var totalCount = 0
-        for ((menu, size) in orderTicket.orderedMenu) {
-            if (menu.type == MenuType.MAIN) {
-                totalCount += WEEKEND_DISCOUNT_UNIT * size
-            }
-        }
-        if (totalCount == 0) {
+        val totalDiscount = orderTicket.totalDiscountAs(MenuType.MAIN, WEEKEND_DISCOUNT_UNIT)
+        if (totalDiscount == 0) {
             return null
         }
-        return Benefit(WEEKEND_DISCOUNT, totalCount)
+        return Benefit(WEEKEND_DISCOUNT, totalDiscount)
     }
 
     fun checkSpecialDiscount(date: Int): Benefit? {

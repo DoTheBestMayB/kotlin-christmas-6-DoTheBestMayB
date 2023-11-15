@@ -11,4 +11,14 @@ data class OrderTicket(
         }
         return totalPrice
     }
+
+    fun totalDiscountAs(type: MenuType, discountUnit: Int): Int {
+        var totalDiscount = 0
+        for ((menu, size) in orderedMenu) {
+            if (menu.type == type) {
+                totalDiscount += discountUnit * size
+            }
+        }
+        return totalDiscount
+    }
 }

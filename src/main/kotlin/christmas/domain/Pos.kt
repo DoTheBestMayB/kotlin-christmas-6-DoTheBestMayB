@@ -23,7 +23,7 @@ class Pos {
     }
 
     private fun calculateBenefits(priceDiscounts: List<Benefit>, gift: Gift?) = gift?.let {
-        priceDiscounts + Benefit(gift.name, gift.getDiscountAmount())
+        priceDiscounts + Benefit(it.name, it.getDiscountAmount())
     } ?: priceDiscounts
 
     private fun calculateTotalBenefitAmount(benefits: List<Benefit>) = benefits.sumOf { it.discountAmount }

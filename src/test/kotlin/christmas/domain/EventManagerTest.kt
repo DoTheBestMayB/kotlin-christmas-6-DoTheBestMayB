@@ -82,7 +82,7 @@ class EventManagerTest {
         val actual = eventManager.checkSpecialDiscount(date)
 
         // then
-        val expected = Benefit(SPECIAL_DISCOUNT, AMOUNT_OF_SPECIAL_DISCOUNT)
+        val expected = Benefit(EventManager.SPECIAL_DISCOUNT, EventManager.AMOUNT_OF_SPECIAL_DISCOUNT)
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -104,6 +104,7 @@ class EventManagerTest {
     fun `구매 금액이 최소 금액 이상인지 아닌지에 따라 증정 이벤트의 증정품을 받을 수 있다`(data: Pair<OrderTicket, Gift?>) {
         // given
         val (orderTicket, expected) = data
+
         // when
         val actual = eventManager.checkAvailableGifts(orderTicket)
 
@@ -136,24 +137,13 @@ class EventManagerTest {
     }
 
     companion object {
-        private const val CHRISTMAS_D_DAY_DISCOUNT = "크리스마스 디데이 할인"
-        private const val WEEK_DISCOUNT = "평일 할인"
-        private const val WEEKEND_DISCOUNT = "주말 할인"
-        private const val SPECIAL_DISCOUNT = "특별 할인"
-        private const val GIFT_MENU_NAME = "샴페인"
-        private const val GIFT_AMOUNT = 1
-        private const val GIFT_EVENT = "증정 이벤트"
-        private const val WEEK_DISCOUNT_UNIT = 2023
-        private const val WEEKEND_DISCOUNT_UNIT = 2023
-        private const val AMOUNT_OF_SPECIAL_DISCOUNT = 1_000
-
         @JvmStatic
         fun createCheckChristmasDiscountValue(): List<Pair<Int, Benefit>> {
             return listOf(
-                1 to Benefit(CHRISTMAS_D_DAY_DISCOUNT, 1_000),
-                2 to Benefit(CHRISTMAS_D_DAY_DISCOUNT, 1_100),
-                15 to Benefit(CHRISTMAS_D_DAY_DISCOUNT, 2_400),
-                25 to Benefit(CHRISTMAS_D_DAY_DISCOUNT, 3_400),
+                1 to Benefit(EventManager.CHRISTMAS_D_DAY_DISCOUNT, 1_000),
+                2 to Benefit(EventManager.CHRISTMAS_D_DAY_DISCOUNT, 1_100),
+                15 to Benefit(EventManager.CHRISTMAS_D_DAY_DISCOUNT, 2_400),
+                25 to Benefit(EventManager.CHRISTMAS_D_DAY_DISCOUNT, 3_400),
             )
         }
 
@@ -171,14 +161,14 @@ class EventManagerTest {
                         Menu.from("초코케이크")!! to 3,
                         Menu.from("제로콜라")!! to 2,
                     )
-                ) to Benefit(WEEK_DISCOUNT, WEEK_DISCOUNT_UNIT * 3),
+                ) to Benefit(EventManager.WEEK_DISCOUNT, EventManager.WEEK_DISCOUNT_UNIT * 3),
                 OrderTicket(
                     linkedMapOf(
                         Menu.from("초코케이크")!! to 3,
                         Menu.from("아이스크림")!! to 2,
                         Menu.from("제로콜라")!! to 2,
                     )
-                ) to Benefit(WEEK_DISCOUNT, WEEK_DISCOUNT_UNIT * 5),
+                ) to Benefit(EventManager.WEEK_DISCOUNT, EventManager.WEEK_DISCOUNT_UNIT * 5),
             )
         }
 
@@ -198,20 +188,20 @@ class EventManagerTest {
                         Menu.from("아이스크림")!! to 2,
                         Menu.from("제로콜라")!! to 2,
                     )
-                ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 2),
+                ) to Benefit(EventManager.WEEKEND_DISCOUNT, EventManager.WEEKEND_DISCOUNT_UNIT * 2),
                 OrderTicket(
                     linkedMapOf(
                         Menu.from("티본스테이크")!! to 7,
                         Menu.from("제로콜라")!! to 2,
                     )
-                ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 7),
+                ) to Benefit(EventManager.WEEKEND_DISCOUNT, EventManager.WEEKEND_DISCOUNT_UNIT * 7),
                 OrderTicket(
                     linkedMapOf(
                         Menu.from("티본스테이크")!! to 4,
                         Menu.from("바비큐립")!! to 2,
                         Menu.from("제로콜라")!! to 2,
                     )
-                ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 6),
+                ) to Benefit(EventManager.WEEKEND_DISCOUNT, EventManager.WEEKEND_DISCOUNT_UNIT * 6),
                 OrderTicket(
                     linkedMapOf(
                         Menu.from("티본스테이크")!! to 4,
@@ -220,7 +210,7 @@ class EventManagerTest {
                         Menu.from("해산물파스타")!! to 1,
                         Menu.from("크리스마스파스타")!! to 1,
                     )
-                ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 8),
+                ) to Benefit(EventManager.WEEKEND_DISCOUNT, EventManager.WEEKEND_DISCOUNT_UNIT * 8),
             )
         }
 
@@ -243,19 +233,19 @@ class EventManagerTest {
                         Menu.from("티본스테이크")!! to 2,
                         Menu.from("제로콜라")!! to 4,
                     )
-                ) to Gift(GIFT_EVENT, Menu.from(GIFT_MENU_NAME)!!, GIFT_AMOUNT),
+                ) to Gift(EventManager.GIFT_EVENT, Menu.from(EventManager.GIFT_MENU_NAME)!!, EventManager.GIFT_AMOUNT),
                 OrderTicket(
                     linkedMapOf(
                         Menu.from("초코케이크")!! to 8,
                     )
-                ) to Gift(GIFT_EVENT, Menu.from(GIFT_MENU_NAME)!!, GIFT_AMOUNT),
+                ) to Gift(EventManager.GIFT_EVENT, Menu.from(EventManager.GIFT_MENU_NAME)!!, EventManager.GIFT_AMOUNT),
                 OrderTicket(
                     linkedMapOf(
                         Menu.from("아이스크림")!! to 10,
                         Menu.from("양송이수프")!! to 9,
                         Menu.from("크리스마스파스타")!! to 1,
                     )
-                ) to Gift(GIFT_EVENT, Menu.from(GIFT_MENU_NAME)!!, GIFT_AMOUNT),
+                ) to Gift(EventManager.GIFT_EVENT, Menu.from(EventManager.GIFT_MENU_NAME)!!, EventManager.GIFT_AMOUNT),
             )
         }
 

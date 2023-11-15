@@ -68,16 +68,16 @@ class EventManager {
     private fun isGiftAvailable(totalPrice: Int) = totalPrice >= MIN_TOTAL_ORDER_PRICE_FOR_GIFT
 
     companion object {
-        private const val WEEKEND_DISCOUNT_UNIT = 2023
-        private const val WEEK_DISCOUNT_UNIT = 2023
+        const val WEEKEND_DISCOUNT_UNIT = 2023
+        const val WEEK_DISCOUNT_UNIT = 2023
         private const val MIN_TOTAL_ORDER_PRICE_FOR_GIFT = 120_000
         private const val MIN_ORDER_PRICE_TO_APPLY_EVENT = 10_000
         private const val CHRISTMAS_D_DAY_DEFAULT_DISCOUNT = 1_000
-        private const val AMOUNT_OF_SPECIAL_DISCOUNT = 1_000
+        const val AMOUNT_OF_SPECIAL_DISCOUNT = 1_000
         private const val CHRISTMAS_D_DAY_DISCOUNT_UNIT = 100
         private const val CHRISTMAS_D_DAY_DISCOUNT_DAY_CORRECTION_VALUE = 1
         private const val GIFT_MENU_NO_EXIST = "[ERROR] 기프트 메뉴가 현재 판매 중이지 않습니다."
-        private const val WEEKEND_DISCOUNT = "주말 할인"
+        const val WEEKEND_DISCOUNT = "주말 할인"
         const val GIFT_MENU_NAME = "샴페인"
         const val GIFT_AMOUNT = 1
         const val CHRISTMAS_D_DAY_DISCOUNT = "크리스마스 디데이 할인"

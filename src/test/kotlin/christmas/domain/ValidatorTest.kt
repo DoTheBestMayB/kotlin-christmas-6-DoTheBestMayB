@@ -68,7 +68,7 @@ class ValidatorTest {
     @DisplayName("Validator : changeInputToOrderTicket - fail(입력 포맷)")
     fun `포맷과 다르게 메뉴를 입력한 경우 에러를 반환한다`(input: String) {
         // when
-        val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
+        val actual = assertThrows(IllegalArgumentException::class.java) {
             validator.changeInputToOrderTicket(input)
         }
 
@@ -84,7 +84,7 @@ class ValidatorTest {
     @DisplayName("Validator : changeInputToOrderTicket - fail(입력한 메뉴 개수)")
     fun `입력한 메뉴의 개수가 1 이상의 숫자가 아닐 때 에러를 반환한다`(input: String) {
         // when
-        val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
+        val actual = assertThrows(IllegalArgumentException::class.java) {
             validator.changeInputToOrderTicket(input)
         }
 
@@ -100,7 +100,7 @@ class ValidatorTest {
     @DisplayName("Validator : changeInputToOrderTicket - fail(총 주문 메뉴 20개 초과)")
     fun `고객이 메뉴를 20개를 초과해서 주문한 경우 에러를 반환한다`(input: String) {
         // when
-        val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
+        val actual = assertThrows(IllegalArgumentException::class.java) {
             validator.changeInputToOrderTicket(input)
         }
 
@@ -116,7 +116,7 @@ class ValidatorTest {
     @DisplayName("Validator : changeInputToOrderTicket - fail(메뉴판에 없는 메뉴 주문)")
     fun `고객이 메뉴판에 없는 메뉴를 입력한 경우 에러를 반환한다`(input: String) {
         // when
-        val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
+        val actual = assertThrows(IllegalArgumentException::class.java) {
             validator.changeInputToOrderTicket(input)
         }
 
@@ -132,7 +132,7 @@ class ValidatorTest {
     @DisplayName("Validator : changeInputToOrderTicket - fail(메뉴 중복 주문)")
     fun `고객이 중복메뉴를 입력한 경우 에러를 반환한다`(input: String) {
         // when
-        val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
+        val actual = assertThrows(IllegalArgumentException::class.java) {
             validator.changeInputToOrderTicket(input)
         }
 
@@ -148,7 +148,7 @@ class ValidatorTest {
     @DisplayName("Validator : changeInputToOrderTicket - fail(음료수만 주문)")
     fun `고객이 음료만 주문한 경우`(input: String) {
         // when
-        val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
+        val actual = assertThrows(IllegalArgumentException::class.java) {
             validator.changeInputToOrderTicket(input)
         }
 

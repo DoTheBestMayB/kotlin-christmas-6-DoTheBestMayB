@@ -159,14 +159,14 @@ class EventManagerTest {
         }
 
         @JvmStatic
-        fun createCheckWeekDiscountValue(): List<Pair<OrderTicket, Benefit>> {
+        fun createCheckWeekDiscountValue(): List<Pair<OrderTicket, Benefit?>> {
             return listOf(
                 OrderTicket(
                     linkedMapOf(
                         Menu.from("양송이수프")!! to 3,
                         Menu.from("제로콜라")!! to 2,
                     )
-                ) to Benefit(WEEK_DISCOUNT, 0),
+                ) to null,
                 OrderTicket(
                     linkedMapOf(
                         Menu.from("초코케이크")!! to 3,
@@ -184,7 +184,7 @@ class EventManagerTest {
         }
 
         @JvmStatic
-        fun createCheckWeekendDiscountValue(): List<Pair<OrderTicket, Benefit>> {
+        fun createCheckWeekendDiscountValue(): List<Pair<OrderTicket, Benefit?>> {
             return listOf(
                 OrderTicket(
                     linkedMapOf(
@@ -192,7 +192,7 @@ class EventManagerTest {
                         Menu.from("아이스크림")!! to 2,
                         Menu.from("제로콜라")!! to 2,
                     )
-                ) to Benefit(WEEKEND_DISCOUNT, 0),
+                ) to null,
                 OrderTicket(
                     linkedMapOf(
                         Menu.from("티본스테이크")!! to 2,

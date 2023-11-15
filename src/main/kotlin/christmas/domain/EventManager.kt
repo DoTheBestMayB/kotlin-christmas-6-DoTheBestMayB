@@ -16,22 +16,28 @@ class EventManager {
         return Benefit(CHRISTMAS_D_DAY_DISCOUNT, discountAmount)
     }
 
-    fun checkWeekDiscount(orderTicket: OrderTicket): Benefit {
+    fun checkWeekDiscount(orderTicket: OrderTicket): Benefit? {
         var totalCount = 0
         for ((menu, size) in orderTicket.orderedMenu) {
             if (menu.type == MenuType.DESSERT) {
                 totalCount += WEEK_DISCOUNT_UNIT * size
             }
         }
+        if (totalCount == 0) {
+            return null
+        }
         return Benefit(WEEK_DISCOUNT, totalCount)
     }
 
-    fun checkWeekendDiscount(orderTicket: OrderTicket): Benefit {
+    fun checkWeekendDiscount(orderTicket: OrderTicket): Benefit? {
         var totalCount = 0
         for ((menu, size) in orderTicket.orderedMenu) {
             if (menu.type == MenuType.MAIN) {
                 totalCount += WEEKEND_DISCOUNT_UNIT * size
             }
+        }
+        if (totalCount == 0) {
+            return null
         }
         return Benefit(WEEKEND_DISCOUNT, totalCount)
     }

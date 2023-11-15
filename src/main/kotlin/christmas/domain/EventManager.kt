@@ -68,12 +68,12 @@ class EventManager {
         private const val AMOUNT_OF_SPECIAL_DISCOUNT = 1_000
         private const val CHRISTMAS_D_DAY_DISCOUNT_UNIT = 100
         private const val CHRISTMAS_D_DAY_DISCOUNT_DAY_CORRECTION_VALUE = 1
+        private const val GIFT_MENU_NO_EXIST = "[ERROR] 기프트 메뉴가 현재 판매 중이지 않습니다."
+        private const val WEEKEND_DISCOUNT = "주말 할인"
         const val GIFT_MENU_NAME = "샴페인"
         const val GIFT_AMOUNT = 1
-        private const val GIFT_MENU_NO_EXIST = "[ERROR] 기프트 메뉴가 현재 판매 중이지 않습니다."
         const val CHRISTMAS_D_DAY_DISCOUNT = "크리스마스 디데이 할인"
         const val WEEK_DISCOUNT = "평일 할인"
-        private const val WEEKEND_DISCOUNT = "주말 할인"
         const val SPECIAL_DISCOUNT = "특별 할인"
         const val GIFT_EVENT = "증정 이벤트"
     }

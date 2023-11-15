@@ -41,7 +41,6 @@ class Planner(
         DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY -> eventManager.checkWeekDiscount(
             orderTicket
         )
-
         DayOfWeek.FRIDAY, DayOfWeek.SATURDAY -> eventManager.checkWeekendDiscount(orderTicket)
     }
 }

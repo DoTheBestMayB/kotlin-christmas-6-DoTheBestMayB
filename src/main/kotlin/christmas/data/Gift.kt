@@ -5,6 +5,7 @@ data class Gift(
     val menu: Menu,
     val size: Int,
 ) {
+
     fun getDiscountAmount() = menu.price * size
 
     fun asMenuAndSize() = "${menu.koreanName} ${size}개"

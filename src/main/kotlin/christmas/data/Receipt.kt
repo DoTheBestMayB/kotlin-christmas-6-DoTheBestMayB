@@ -11,6 +11,7 @@ data class Receipt(
     val grandTotal: Int,
     val badge: Badge,
 ) {
+
     override fun toString(): String {
         val menuSentence = "<주문 메뉴>${makeOrderMenuSentence()}"
         val originalTotalPriceSentence = "<할인 전 총주문 금액>$LINE_SEPARATOR${priceFormat.format(originalTotalPrice)}원"
@@ -49,7 +50,6 @@ data class Receipt(
 
     private fun makeTotalBenefitPriceSentence() =
         "-${priceFormat.format(totalBenefitPrice)}".takeIf { totalBenefitPrice != 0 } ?: "0"
-
 
     companion object {
         private val LINE_SEPARATOR = System.lineSeparator()

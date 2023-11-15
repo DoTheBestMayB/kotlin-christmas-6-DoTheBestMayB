@@ -12,6 +12,6 @@ private fun createPlanner(): Planner {
     val inputView = InputView(outputView, Validator.getInstance())
     val menuManager = MenuManager()
     val eventManager = EventManager(menuManager)
-    val pos = Pos(eventManager)
-    return Planner(outputView, inputView, pos, menuManager)
+    val pos = Pos()
+    return Planner(outputView, inputView, pos, menuManager, eventManager)
 }

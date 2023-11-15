@@ -9,7 +9,7 @@ data class Receipt(
     val benefits: List<Benefit>,
     val totalBenefitPrice: Int,
     val grandTotal: Int,
-    val badge: BADGE,
+    val badge: Badge,
 ) {
     override fun toString(): String {
         val menuSentence = "<주문 메뉴>${makeOrderMenuSentence()}"

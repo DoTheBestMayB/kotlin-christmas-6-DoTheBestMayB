@@ -22,7 +22,7 @@ class Pos {
             benefits = benefits,
             totalBenefitPrice = totalBenefitPrice,
             grandTotal = orderTicket.totalOrderPrice() - priceDiscounts.sumOf { it.discountAmount },
-            badge = BADGE.from(totalBenefitPrice)
+            badge = Badge.from(totalBenefitPrice)
         ).also {
             receipts.add(it)
         }

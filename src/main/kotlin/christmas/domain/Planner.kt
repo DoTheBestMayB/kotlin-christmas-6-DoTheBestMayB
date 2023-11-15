@@ -6,7 +6,6 @@ class Planner(
     private val outputView: OutputView,
     private val inputView: InputView,
     private val pos: Pos,
-    private val menuManager: MenuManager,
     private val eventManager: EventManager,
 ): RetryStrategy() {
 
@@ -22,5 +21,5 @@ class Planner(
 
     private fun askVisitDay() = doUntilSuccess { inputView.readDate() }
 
-    private fun askMenu() = doUntilSuccess { inputView.readMenu(menuManager) }
+    private fun askMenu() = doUntilSuccess { inputView.readMenu() }
 }

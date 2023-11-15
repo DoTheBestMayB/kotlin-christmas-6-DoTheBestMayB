@@ -4,7 +4,7 @@ import christmas.data.*
 import java.time.DayOfWeek
 import java.time.LocalDate
 
-class EventManager(private val menuManager: MenuManager) {
+class EventManager {
 
     private val specialDiscountDay = listOf(3, 10, 17, 24, 25, 31)
 
@@ -35,7 +35,7 @@ class EventManager(private val menuManager: MenuManager) {
     fun checkWeekDiscount(orderTicket: OrderTicket): Benefit {
         var totalCount = 0
         for ((menu, size) in orderTicket.orderedMenu) {
-            if (menu.type == MENU_TYPE.DESSERT) {
+            if (menu.type == MenuType.DESSERT) {
                 totalCount += WEEK_DISCOUNT_UNIT * size
             }
         }
@@ -45,7 +45,7 @@ class EventManager(private val menuManager: MenuManager) {
     fun checkWeekendDiscount(orderTicket: OrderTicket): Benefit {
         var totalCount = 0
         for ((menu, size) in orderTicket.orderedMenu) {
-            if (menu.type == MENU_TYPE.MAIN) {
+            if (menu.type == MenuType.MAIN) {
                 totalCount += WEEKEND_DISCOUNT_UNIT * size
             }
         }
@@ -63,7 +63,7 @@ class EventManager(private val menuManager: MenuManager) {
         if (orderTicket.totalOrderPrice() < MIN_TOTAL_ORDER_PRICE_FOR_GIFT) {
             return null
         }
-        val gift = menuManager.getMenu(GIFT_MENU_NAME) ?: throw NoSuchElementException(GIFT_MENU_NO_EXIST)
+        val gift = Menu.from(GIFT_MENU_NAME) ?: throw NoSuchElementException(GIFT_MENU_NO_EXIST)
         return Gift(GIFT_EVENT, gift, GIFT_AMOUNT)
     }
 

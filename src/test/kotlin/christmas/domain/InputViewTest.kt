@@ -1,7 +1,7 @@
 package christmas.domain
 
 import camp.nextstep.edu.missionutils.Console
-import christmas.data.MENU_TYPE
+import christmas.data.MenuType
 import christmas.data.Menu
 import christmas.data.OrderTicket
 import org.assertj.core.api.Assertions
@@ -91,12 +91,11 @@ class InputViewTest {
     @DisplayName("InputView : readMenu - fail(입력 포맷)")
     fun `포맷과 다르게 메뉴를 입력한 경우 에러를 반환한다`(input: String) {
         // given
-        val menuManager = MenuManager()
         setInput(input)
 
         // when
         val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
-            inputView.readMenu(menuManager)
+            inputView.readMenu()
         }
         // then
         val expectedClass = IllegalArgumentException::class.java
@@ -110,12 +109,11 @@ class InputViewTest {
     @DisplayName("InputView : readMenu - fail(입력한 메뉴 개수)")
     fun `입력한 메뉴의 개수가 1 이상의 숫자가 아닐 때 에러를 반환한다`(input: String) {
         // given
-        val menuManager = MenuManager()
         setInput(input)
 
         // when
         val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
-            inputView.readMenu(menuManager)
+            inputView.readMenu()
         }
         // then
         val expectedClass = IllegalArgumentException::class.java
@@ -129,12 +127,11 @@ class InputViewTest {
     @DisplayName("InputView : readMenu - fail(총 주문 메뉴 20개 초과)")
     fun `고객이 메뉴를 20개를 초과해서 주문한 경우 에러를 반환한다`(input: String) {
         // given
-        val menuManager = MenuManager()
         setInput(input)
 
         // when
         val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
-            inputView.readMenu(menuManager)
+            inputView.readMenu()
         }
         // then
         val expectedClass = IllegalArgumentException::class.java
@@ -148,12 +145,11 @@ class InputViewTest {
     @DisplayName("InputView : readMenu - fail(메뉴판에 없는 메뉴 주문)")
     fun `고객이 메뉴판에 없는 메뉴를 입력한 경우 에러를 반환한다`(input: String) {
         // given
-        val menuManager = MenuManager()
         setInput(input)
 
         // when
         val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
-            inputView.readMenu(menuManager)
+            inputView.readMenu()
         }
         // then
         val expectedClass = IllegalArgumentException::class.java
@@ -167,12 +163,11 @@ class InputViewTest {
     @DisplayName("InputView : readMenu - fail(메뉴 중복 주문)")
     fun `고객이 중복메뉴를 입력한 경우 에러를 반환한다`(input: String) {
         // given
-        val menuManager = MenuManager()
         setInput(input)
 
         // when
         val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
-            inputView.readMenu(menuManager)
+            inputView.readMenu()
         }
         // then
         val expectedClass = IllegalArgumentException::class.java
@@ -186,12 +181,11 @@ class InputViewTest {
     @DisplayName("InputView : readMenu - fail(음료수만 주문)")
     fun `고객이 음료만 주문한 경우`(input: String) {
         // given
-        val menuManager = MenuManager()
         setInput(input)
 
         // when
         val actual: java.lang.IllegalArgumentException = assertThrows(IllegalArgumentException::class.java) {
-            inputView.readMenu(menuManager)
+            inputView.readMenu()
         }
         // then
         val expectedClass = IllegalArgumentException::class.java
@@ -206,11 +200,10 @@ class InputViewTest {
     fun `고객이 정상적으로 주문한 경우, 주문한 메뉴를 반환한다`(data: Pair<String, OrderTicket>) {
         // given
         val (input, expected) = data
-        val menuManager = MenuManager()
         setInput(input)
 
         // when
-        val actual = inputView.readMenu(menuManager)
+        val actual = inputView.readMenu()
 
         // then
         Assertions.assertThat(actual).isEqualTo(expected)
@@ -226,20 +219,20 @@ class InputViewTest {
         fun createValueForReadMenuSuccess() = listOf(
             "해산물파스타-2,레드와인-1,초코케이크-1" to OrderTicket(
                 hashMapOf(
-                    Menu(MENU_TYPE.MAIN, "해산물파스타", 35_000) to 2,
-                    Menu(MENU_TYPE.DRINK, "레드와인", 60_000) to 1,
-                    Menu(MENU_TYPE.DESSERT, "초코케이크", 15_000) to 1,
+                    Menu.from("해산물파스타")!! to 2,
+                    Menu.from("레드와인")!! to 1,
+                    Menu.from("초코케이크")!! to 1,
                 )
             ),
             "양송이수프-5,티본스테이크-3,바비큐립-2,레드와인-1,초코케이크-1,아이스크림-1,샴페인-1" to OrderTicket(
                 hashMapOf(
-                    Menu(MENU_TYPE.APPETIZER, "양송이수프", 6000) to 5,
-                    Menu(MENU_TYPE.MAIN, "티본스테이크", 55_000) to 3,
-                    Menu(MENU_TYPE.MAIN, "바비큐립", 54_000) to 2,
-                    Menu(MENU_TYPE.DRINK, "레드와인", 60_000) to 1,
-                    Menu(MENU_TYPE.DESSERT, "초코케이크", 15_000) to 1,
-                    Menu(MENU_TYPE.DESSERT, "아이스크림", 5_000) to 1,
-                    Menu(MENU_TYPE.DRINK, "샴페인", 25_000) to 1,
+                    Menu.from("양송이수프")!! to 5,
+                    Menu.from("티본스테이크")!! to 3,
+                    Menu.from("바비큐립")!! to 2,
+                    Menu.from("레드와인")!! to 1,
+                    Menu.from("초코케이크")!! to 1,
+                    Menu.from("아이스크림")!! to 1,
+                    Menu.from("샴페인")!! to 1,
                 )
             ),
         )

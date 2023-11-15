@@ -1,7 +1,7 @@
 package christmas.domain
 
 import camp.nextstep.edu.missionutils.Console
-import christmas.data.MENU_TYPE
+import christmas.data.MenuType
 import christmas.data.Menu
 import christmas.data.OrderTicket
 
@@ -22,13 +22,13 @@ class InputView(
         return input.toInt()
     }
 
-    fun readMenu(menuManager: MenuManager): OrderTicket {
+    fun readMenu(): OrderTicket {
         outputView.show(REQUEST_INPUT_MENU, true)
         val input = read()
-        return changeInputToMenu(input, menuManager)
+        return changeInputToMenu(input)
     }
 
-    private fun changeInputToMenu(input: String, menuManager: MenuManager): OrderTicket {
+    private fun changeInputToMenu(input: String): OrderTicket {
         val orderedMenu = hashMapOf<Menu, Int>()
         var isNotOnlyDrink = false
 
@@ -40,13 +40,13 @@ class InputView(
 
             checkValidity(size + orderedMenu.values.sum(), ORDER_SIZE_IS_OVER) { validator.checkTotalOrderSize(it) }
 
-            val menu = requireNotNull(menuManager.getMenu(name)) {
+            val menu = requireNotNull(Menu.from(name)) {
                 ORDER_IS_NOT_VALID
             }
             if (menu in orderedMenu) {
                 throw IllegalArgumentException(ORDER_IS_NOT_VALID)
             }
-            isNotOnlyDrink = isNotOnlyDrink || (menu.type != MENU_TYPE.DRINK)
+            isNotOnlyDrink = isNotOnlyDrink || (menu.type != MenuType.DRINK)
             orderedMenu[menu] = size
         }
         require(isNotOnlyDrink) {

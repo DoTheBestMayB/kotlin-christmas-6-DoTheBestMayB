@@ -5,17 +5,17 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class BADGETest {
+class BadgeTest {
     
     @ParameterizedTest
     @ValueSource(ints = [20_000, 30_000, 999_999])
     @DisplayName("BADGE - SANTA")
     fun `2만 원 이상의 혜택을 받으면 SANTA를 반환한다`(benefitAmount: Int) {
         // when
-        val actual = BADGE.from(benefitAmount)
+        val actual = Badge.from(benefitAmount)
 
         // then
-        val expected = BADGE.SANTA
+        val expected = Badge.SANTA
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -24,10 +24,10 @@ class BADGETest {
     @DisplayName("BADGE - TREE")
     fun `1만 원 이상 2만 원 미만의 혜택을 받으면 TREE를 반환한다`(benefitAmount: Int) {
         // when
-        val actual = BADGE.from(benefitAmount)
+        val actual = Badge.from(benefitAmount)
 
         // then
-        val expected = BADGE.TREE
+        val expected = Badge.TREE
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -36,10 +36,10 @@ class BADGETest {
     @DisplayName("BADGE - STAR")
     fun `5천 원 이상 1만 원 미만의 혜택을 받으면 STAR를 반환한다`(benefitAmount: Int) {
         // when
-        val actual = BADGE.from(benefitAmount)
+        val actual = Badge.from(benefitAmount)
 
         // then
-        val expected = BADGE.STAR
+        val expected = Badge.STAR
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -48,10 +48,10 @@ class BADGETest {
     @DisplayName("BADGE - NONE")
     fun `그 외의 혜택을 받으면 NONE을 반환한다`(benefitAmount: Int) {
         // when
-        val actual = BADGE.from(benefitAmount)
+        val actual = Badge.from(benefitAmount)
 
         // then
-        val expected = BADGE.NONE
+        val expected = Badge.NONE
         assertThat(actual).isEqualTo(expected)
     }
 }

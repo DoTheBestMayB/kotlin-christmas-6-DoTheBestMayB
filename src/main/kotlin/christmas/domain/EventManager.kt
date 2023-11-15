@@ -8,11 +8,10 @@ class EventManager {
     private val rangeOfChristmasDiscountDay = 1..25
 
     fun checkChristmasDiscount(date: Int): Benefit? {
-        if (date !in rangeOfChristmasDiscountDay) {
+        if (isChristmasDiscountAvailable(date)) {
             return null
         }
-        val discountAmount =
-            CHRISTMAS_D_DAY_DEFAULT_DISCOUNT + (date - CHRISTMAS_D_DAY_DISCOUNT_DAY_CORRECTION_VALUE) * CHRISTMAS_D_DAY_DISCOUNT_UNIT
+        val discountAmount = calculateChristmasDiscountAmount(date)
         return Benefit(CHRISTMAS_D_DAY_DISCOUNT, discountAmount)
     }
 
@@ -43,14 +42,14 @@ class EventManager {
     }
 
     fun checkSpecialDiscount(date: Int): Benefit? {
-        if (date !in specialDiscountDay) {
+        if (isSpecialDiscountAvailable(date)) {
             return null
         }
         return Benefit(SPECIAL_DISCOUNT, AMOUNT_OF_SPECIAL_DISCOUNT)
     }
 
     fun checkAvailableGifts(orderTicket: OrderTicket): Gift? {
-        if (orderTicket.totalOrderPrice() < MIN_TOTAL_ORDER_PRICE_FOR_GIFT) {
+        if (isGiftAvailable(orderTicket.totalOrderPrice()).not()) {
             return null
         }
         val gift = Menu.from(GIFT_MENU_NAME) ?: throw NoSuchElementException(GIFT_MENU_NO_EXIST)
@@ -58,6 +57,15 @@ class EventManager {
     }
 
     fun canApplyEvent(orderTicket: OrderTicket) = orderTicket.totalOrderPrice() >= MIN_ORDER_PRICE_TO_APPLY_EVENT
+
+    private fun isChristmasDiscountAvailable(date: Int) = date !in rangeOfChristmasDiscountDay
+
+    private fun calculateChristmasDiscountAmount(date: Int) =
+        CHRISTMAS_D_DAY_DEFAULT_DISCOUNT + (date - CHRISTMAS_D_DAY_DISCOUNT_DAY_CORRECTION_VALUE) * CHRISTMAS_D_DAY_DISCOUNT_UNIT
+
+    private fun isSpecialDiscountAvailable(date: Int) = date !in specialDiscountDay
+
+    private fun isGiftAvailable(totalPrice: Int) = totalPrice >= MIN_TOTAL_ORDER_PRICE_FOR_GIFT
 
     companion object {
         private const val WEEKEND_DISCOUNT_UNIT = 2023

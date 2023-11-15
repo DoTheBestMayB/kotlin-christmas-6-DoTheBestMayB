@@ -74,8 +74,8 @@ class PosTest {
                                 ).getDiscountAmount()
                             )
                         ),
-                        totalBenefitPrice = 38_715,
-                        grandTotal = 116_285,
+                        totalBenefitAmount = 38_715,
+                        expectedPayPrice = 116_285,
                         badge = Badge.SANTA,
                     )
                 ),
@@ -97,8 +97,8 @@ class PosTest {
                         originalTotalPrice = 8_000,
                         gift = null,
                         benefits = listOf(),
-                        totalBenefitPrice = 0,
-                        grandTotal = 8_000,
+                        totalBenefitAmount = 0,
+                        expectedPayPrice = 8_000,
                         badge = Badge.NONE,
                     )
                 )

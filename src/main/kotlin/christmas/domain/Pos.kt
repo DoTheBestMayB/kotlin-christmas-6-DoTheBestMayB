@@ -9,18 +9,25 @@ class Pos {
         priceDiscounts: List<Benefit>,
         gift: Gift?,
     ): Receipt {
-        val benefits = gift?.let {
-            priceDiscounts + Benefit(gift.name, gift.getDiscountAmount())
-        } ?: priceDiscounts
-        val totalBenefitPrice = benefits.sumOf { it.discountAmount }
+        val benefits = calculateBenefits(priceDiscounts, gift)
+        val totalBenefitAmount = calculateTotalBenefitAmount(benefits)
         return Receipt(
             orderMenu = orderTicket.orderedMenu,
             originalTotalPrice = orderTicket.totalOrderPrice(),
             gift = gift,
             benefits = benefits,
-            totalBenefitPrice = totalBenefitPrice,
-            grandTotal = orderTicket.totalOrderPrice() - priceDiscounts.sumOf { it.discountAmount },
-            badge = Badge.from(totalBenefitPrice)
+            totalBenefitAmount = totalBenefitAmount,
+            expectedPayPrice = calculateExpectedPayPrice(orderTicket, priceDiscounts),
+            badge = Badge.from(totalBenefitAmount)
         )
     }
+
+    private fun calculateBenefits(priceDiscounts: List<Benefit>, gift: Gift?) = gift?.let {
+        priceDiscounts + Benefit(gift.name, gift.getDiscountAmount())
+    } ?: priceDiscounts
+
+    private fun calculateTotalBenefitAmount(benefits: List<Benefit>) = benefits.sumOf { it.discountAmount }
+
+    private fun calculateExpectedPayPrice(orderTicket: OrderTicket, priceDiscounts: List<Benefit>) =
+        orderTicket.totalOrderPrice() - priceDiscounts.sumOf { it.discountAmount }
 }

@@ -7,8 +7,8 @@ data class Receipt(
     val originalTotalPrice: Int,
     val gift: Gift?,
     val benefits: List<Benefit>,
-    val totalBenefitPrice: Int,
-    val grandTotal: Int,
+    val totalBenefitAmount: Int,
+    val expectedPayPrice: Int,
     val badge: Badge,
 ) {
 
@@ -18,11 +18,11 @@ data class Receipt(
         val giftSentence = "<증정 메뉴>$LINE_SEPARATOR${makeGiftSentence()}"
         val benefitsSentence = "<혜택 내역>$LINE_SEPARATOR${makeBenefitSentence()}"
         val totalBenefitPriceSentence = "<총혜택 금액>$LINE_SEPARATOR${makeTotalBenefitPriceSentence()}원"
-        val grandTotalSentence = "<할인 후 예상 결제 금액>$LINE_SEPARATOR${makeGrandTotalSentence()}원"
+        val expectedPayPrice = "<할인 후 예상 결제 금액>$LINE_SEPARATOR${makeExpectedPayPriceSentence()}원"
         val badgeSentence = "<12월 이벤트 배지>$LINE_SEPARATOR${makeBadgeSentence()}"
         return listOf(
             menuSentence, originalTotalPriceSentence, giftSentence, benefitsSentence,
-            totalBenefitPriceSentence, grandTotalSentence, badgeSentence,
+            totalBenefitPriceSentence, expectedPayPrice, badgeSentence,
         ).joinToString(
             LINE_SEPARATOR + LINE_SEPARATOR
         )
@@ -48,9 +48,9 @@ data class Receipt(
     }
 
     private fun makeTotalBenefitPriceSentence() =
-        "-${priceFormat.format(totalBenefitPrice)}".takeIf { totalBenefitPrice != 0 } ?: "0"
+        "-${priceFormat.format(totalBenefitAmount)}".takeIf { totalBenefitAmount != 0 } ?: "0"
 
-    private fun makeGrandTotalSentence() = priceFormat.format(grandTotal)
+    private fun makeExpectedPayPriceSentence() = priceFormat.format(expectedPayPrice)
 
     private fun makeBadgeSentence() = badge.nickName
 

@@ -17,6 +17,7 @@
 - [x] 출력을 담당하는 OutputView 클래스를 만든다.
   - [x] 입력한 문자열을 출력하는 함수를 만든다.
 - [x] Exception이 발생해도 입력받은 함수를 다시 실행하는 함수를 가진 RetryStrategy 클래스를 만든다. 
+  - Exception handling과 관련된 함수이기 때문에, 다른 클래스에 의존성을 가지면 안 된다고 생각했습니다. 그래서 OutputView를 사용하지 않고 출력했습니다.
 - [x] 이벤트 배지를 나타내는 Badge Enum 클래스를 만든다.
 - [x] 진행 중인 이벤트를 관리하는 EventManager 클래스를 만든다.
 - [x] 할인 정보를 나타내는 Benefit 데이터 클래스를 만든다.

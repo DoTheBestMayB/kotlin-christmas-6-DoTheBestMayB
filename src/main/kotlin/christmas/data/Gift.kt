@@ -7,5 +7,5 @@ data class Gift(
 ) {
     fun getDiscountAmount() = menu.price * size
 
-    fun asMenuAndSize() = "${menu.name} ${size}개"
+    fun asMenuAndSize() = "${menu.koreanName} ${size}개"
 }

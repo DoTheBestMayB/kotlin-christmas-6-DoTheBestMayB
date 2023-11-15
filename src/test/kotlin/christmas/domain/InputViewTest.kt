@@ -22,7 +22,7 @@ class InputViewTest {
 
     @BeforeEach
     fun setUp() {
-        validator = Validator.getInstance()
+        validator = Validator()
         outputView = OutputView()
         inputView = InputView(outputView, validator)
     }
@@ -30,7 +30,6 @@ class InputViewTest {
     @AfterEach
     fun tearDown() {
         Console.close()
-        Validator.releaseInstance()
     }
 
     @ParameterizedTest

@@ -1,6 +1,6 @@
 package christmas.domain
 
-class Validator private constructor() {
+class Validator {
 
     private val validBookingDay = 1..31
 
@@ -19,28 +19,4 @@ class Validator private constructor() {
     }
 
     fun checkTotalOrderSize(size: Int) = size <= InputView.MAX_TOTAL_ORDER_SIZE
-
-    companion object {
-        private var instance: Validator? = null
-
-        fun getInstance(): Validator {
-            val currentInstance = instance
-            if (currentInstance != null) {
-                return currentInstance
-            }
-            return synchronized(this) {
-                val synchronizedInstance = instance
-                if (synchronizedInstance != null) {
-                    return@synchronized synchronizedInstance
-                }
-                val createdValidator = Validator()
-                instance = createdValidator
-                createdValidator
-            }
-        }
-
-        fun releaseInstance() {
-            instance = null
-        }
-    }
 }

@@ -9,7 +9,7 @@ fun main() {
 
 private fun createPlanner(): Planner {
     val outputView = OutputView()
-    val inputView = InputView(outputView, Validator.getInstance())
+    val inputView = InputView(outputView, Validator())
     val eventManager = EventManager()
     val pos = Pos()
     return Planner(outputView, inputView, pos, eventManager)

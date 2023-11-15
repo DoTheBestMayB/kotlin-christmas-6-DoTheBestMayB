@@ -40,7 +40,7 @@ class EventManager {
         if (date !in specialDiscountDay) {
             return null
         }
-        return Benefit(SPECIAL_DISCOUNT, 1000)
+        return Benefit(SPECIAL_DISCOUNT, AMOUNT_OF_SPECIAL_DISCOUNT)
     }
 
     fun checkAvailableGifts(orderTicket: OrderTicket): Gift? {
@@ -59,6 +59,7 @@ class EventManager {
         private const val MIN_TOTAL_ORDER_PRICE_FOR_GIFT = 120_000
         private const val MIN_ORDER_PRICE_TO_APPLY_EVENT = 10_000
         private const val CHRISTMAS_D_DAY_DEFAULT_DISCOUNT = 1_000
+        private const val AMOUNT_OF_SPECIAL_DISCOUNT = 1_000
         private const val CHRISTMAS_D_DAY_DISCOUNT_UNIT = 100
         private const val CHRISTMAS_D_DAY_DISCOUNT_DAY_CORRECTION_VALUE = 1
         private const val GIFT_MENU_NAME = "샴페인"

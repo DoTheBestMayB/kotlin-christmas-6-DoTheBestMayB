@@ -45,7 +45,7 @@ class EventManagerTest {
         // then
         assertThat(actual).isEqualTo(expected)
     }
-    
+
     @ParameterizedTest
     @MethodSource("createCheckWeekDiscountValue")
     @DisplayName("EventManager : checkWeekDiscount")
@@ -55,7 +55,7 @@ class EventManagerTest {
 
         // when
         val actual = eventManager.checkWeekDiscount(orderTicket)
-        
+
         // then
         assertThat(actual).isEqualTo(expected)
     }
@@ -74,12 +74,38 @@ class EventManagerTest {
         assertThat(actual).isEqualTo(expected)
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = [3, 10, 17, 24, 25, 31])
+    @DisplayName("EventManager : checkSpecialDiscount - apply")
+    fun `달력에 별이 있는 날에 주문하면 특별 할인을 적용한다`(date: Int) {
+        // when
+        val actual = eventManager.checkSpecialDiscount(date)
+
+        // then
+        val expected = Benefit(SPECIAL_DISCOUNT, AMOUNT_OF_SPECIAL_DISCOUNT)
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [1, 2, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 26, 27, 28, 29, 30])
+    @DisplayName("EventManager : checkSpecialDiscount - no apply")
+    fun `달력에 별이 없는 날에 주문하면 특별 할인을 적용하지 않는다`(date: Int) {
+        // when
+        val actual = eventManager.checkSpecialDiscount(date)
+
+        // then
+        val expected = null
+        assertThat(actual).isEqualTo(expected)
+    }
+
     companion object {
         private const val CHRISTMAS_D_DAY_DISCOUNT = "크리스마스 디데이 할인"
         private const val WEEK_DISCOUNT = "평일 할인"
         private const val WEEKEND_DISCOUNT = "주말 할인"
+        private const val SPECIAL_DISCOUNT = "특별 할인"
         private const val WEEK_DISCOUNT_UNIT = 2023
         private const val WEEKEND_DISCOUNT_UNIT = 2023
+        private const val AMOUNT_OF_SPECIAL_DISCOUNT = 1_000
 
         @JvmStatic
         fun createCheckChristmasDiscountValue(): List<Pair<Int, Benefit>> {
@@ -94,51 +120,67 @@ class EventManagerTest {
         @JvmStatic
         fun createCheckWeekDiscountValue(): List<Pair<OrderTicket, Benefit>> {
             return listOf(
-                OrderTicket(hashMapOf(
-                    Menu.from("양송이수프")!! to 3,
-                    Menu.from("제로콜라")!! to 2,
-                )) to Benefit(WEEK_DISCOUNT, 0),
-                OrderTicket(hashMapOf(
-                    Menu.from("초코케이크")!! to 3,
-                    Menu.from("제로콜라")!! to 2,
-                )) to Benefit(WEEK_DISCOUNT, WEEK_DISCOUNT_UNIT * 3),
-                OrderTicket(hashMapOf(
-                    Menu.from("초코케이크")!! to 3,
-                    Menu.from("아이스크림")!! to 2,
-                    Menu.from("제로콜라")!! to 2,
-                )) to Benefit(WEEK_DISCOUNT, WEEK_DISCOUNT_UNIT * 5),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("양송이수프")!! to 3,
+                        Menu.from("제로콜라")!! to 2,
+                    )
+                ) to Benefit(WEEK_DISCOUNT, 0),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("초코케이크")!! to 3,
+                        Menu.from("제로콜라")!! to 2,
+                    )
+                ) to Benefit(WEEK_DISCOUNT, WEEK_DISCOUNT_UNIT * 3),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("초코케이크")!! to 3,
+                        Menu.from("아이스크림")!! to 2,
+                        Menu.from("제로콜라")!! to 2,
+                    )
+                ) to Benefit(WEEK_DISCOUNT, WEEK_DISCOUNT_UNIT * 5),
             )
         }
 
         @JvmStatic
         fun createCheckWeekendDiscountValue(): List<Pair<OrderTicket, Benefit>> {
             return listOf(
-                OrderTicket(hashMapOf(
-                    Menu.from("초코케이크")!! to 3,
-                    Menu.from("아이스크림")!! to 2,
-                    Menu.from("제로콜라")!! to 2,
-                )) to Benefit(WEEKEND_DISCOUNT, 0),
-                OrderTicket(hashMapOf(
-                    Menu.from("티본스테이크")!! to 2,
-                    Menu.from("아이스크림")!! to 2,
-                    Menu.from("제로콜라")!! to 2,
-                )) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 2),
-                OrderTicket(hashMapOf(
-                    Menu.from("티본스테이크")!! to 7,
-                    Menu.from("제로콜라")!! to 2,
-                )) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 7),
-                OrderTicket(hashMapOf(
-                    Menu.from("티본스테이크")!! to 4,
-                    Menu.from("바비큐립")!! to 2,
-                    Menu.from("제로콜라")!! to 2,
-                )) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 6),
-                OrderTicket(hashMapOf(
-                    Menu.from("티본스테이크")!! to 4,
-                    Menu.from("제로콜라")!! to 2,
-                    Menu.from("바비큐립")!! to 2,
-                    Menu.from("해산물파스타")!! to 1,
-                    Menu.from("크리스마스파스타")!! to 1,
-                )) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 8),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("초코케이크")!! to 3,
+                        Menu.from("아이스크림")!! to 2,
+                        Menu.from("제로콜라")!! to 2,
+                    )
+                ) to Benefit(WEEKEND_DISCOUNT, 0),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("티본스테이크")!! to 2,
+                        Menu.from("아이스크림")!! to 2,
+                        Menu.from("제로콜라")!! to 2,
+                    )
+                ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 2),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("티본스테이크")!! to 7,
+                        Menu.from("제로콜라")!! to 2,
+                    )
+                ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 7),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("티본스테이크")!! to 4,
+                        Menu.from("바비큐립")!! to 2,
+                        Menu.from("제로콜라")!! to 2,
+                    )
+                ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 6),
+                OrderTicket(
+                    hashMapOf(
+                        Menu.from("티본스테이크")!! to 4,
+                        Menu.from("제로콜라")!! to 2,
+                        Menu.from("바비큐립")!! to 2,
+                        Menu.from("해산물파스타")!! to 1,
+                        Menu.from("크리스마스파스타")!! to 1,
+                    )
+                ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 8),
             )
         }
     }

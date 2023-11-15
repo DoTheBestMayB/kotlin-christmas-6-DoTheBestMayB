@@ -1,27 +1,10 @@
 package christmas.domain
 
 import christmas.data.*
-import java.time.DayOfWeek
-import java.time.LocalDate
 
 class EventManager {
 
     private val specialDiscountDay = listOf(3, 10, 17, 24, 25, 31)
-
-    fun checkPriceDiscount(orderTicket: OrderTicket, date: Int): List<Benefit> {
-        if (canApplyEvent(orderTicket.totalOrderPrice()).not()) {
-            return emptyList()
-        }
-        val christmasDiscount = checkChristmasDiscount(date)
-        val dayDiscount = when (LocalDate.of(2023, 12, date).dayOfWeek) {
-            DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY -> checkWeekDiscount(
-                orderTicket
-            )
-            DayOfWeek.FRIDAY, DayOfWeek.SATURDAY -> checkWeekendDiscount(orderTicket)
-        }
-        val specialDiscount = checkSpecialDiscount(date)
-        return listOfNotNull(christmasDiscount, dayDiscount, specialDiscount)
-    }
 
     fun checkChristmasDiscount(date: Int): Benefit? {
         if (date > LAST_DAY_OF_CHRISTMAS_D_DAY_DISCOUNT) {
@@ -67,7 +50,7 @@ class EventManager {
         return Gift(GIFT_EVENT, gift, GIFT_AMOUNT)
     }
 
-    fun canApplyEvent(totalOrderPrice: Int) = totalOrderPrice >= MIN_ORDER_PRICE_TO_APPLY_EVENT
+    fun canApplyEvent(orderTicket: OrderTicket) = orderTicket.totalOrderPrice() >= MIN_ORDER_PRICE_TO_APPLY_EVENT
 
     companion object {
         private const val WEEKEND_DISCOUNT_UNIT = 2023

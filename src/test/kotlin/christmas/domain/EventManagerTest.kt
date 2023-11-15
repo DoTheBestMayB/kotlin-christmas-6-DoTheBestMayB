@@ -1,10 +1,11 @@
 package christmas.domain
 
 import christmas.data.Benefit
+import christmas.data.Menu
+import christmas.data.OrderTicket
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.BeforeEach
-
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
@@ -44,9 +45,41 @@ class EventManagerTest {
         // then
         assertThat(actual).isEqualTo(expected)
     }
+    
+    @ParameterizedTest
+    @MethodSource("createCheckWeekDiscountValue")
+    @DisplayName("EventManager : checkWeekDiscount")
+    fun `평일 할인 적용 금액을 계산한다`(data: Pair<OrderTicket, Benefit>) {
+        // given
+        val (orderTicket, expected) = data
+
+        // when
+        val actual = eventManager.checkWeekDiscount(orderTicket)
+        
+        // then
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource("createCheckWeekendDiscountValue")
+    @DisplayName("EventManager : checkWeekendDiscount")
+    fun `주말 할인 적용 금액을 계산한다`(data: Pair<OrderTicket, Benefit>) {
+        // given
+        val (orderTicket, expected) = data
+
+        // when
+        val actual = eventManager.checkWeekendDiscount(orderTicket)
+
+        // then
+        assertThat(actual).isEqualTo(expected)
+    }
 
     companion object {
         private const val CHRISTMAS_D_DAY_DISCOUNT = "크리스마스 디데이 할인"
+        private const val WEEK_DISCOUNT = "평일 할인"
+        private const val WEEKEND_DISCOUNT = "주말 할인"
+        private const val WEEK_DISCOUNT_UNIT = 2023
+        private const val WEEKEND_DISCOUNT_UNIT = 2023
 
         @JvmStatic
         fun createCheckChristmasDiscountValue(): List<Pair<Int, Benefit>> {
@@ -55,6 +88,57 @@ class EventManagerTest {
                 2 to Benefit(CHRISTMAS_D_DAY_DISCOUNT, 1_100),
                 15 to Benefit(CHRISTMAS_D_DAY_DISCOUNT, 2_400),
                 25 to Benefit(CHRISTMAS_D_DAY_DISCOUNT, 3_400),
+            )
+        }
+
+        @JvmStatic
+        fun createCheckWeekDiscountValue(): List<Pair<OrderTicket, Benefit>> {
+            return listOf(
+                OrderTicket(hashMapOf(
+                    Menu.from("양송이수프")!! to 3,
+                    Menu.from("제로콜라")!! to 2,
+                )) to Benefit(WEEK_DISCOUNT, 0),
+                OrderTicket(hashMapOf(
+                    Menu.from("초코케이크")!! to 3,
+                    Menu.from("제로콜라")!! to 2,
+                )) to Benefit(WEEK_DISCOUNT, WEEK_DISCOUNT_UNIT * 3),
+                OrderTicket(hashMapOf(
+                    Menu.from("초코케이크")!! to 3,
+                    Menu.from("아이스크림")!! to 2,
+                    Menu.from("제로콜라")!! to 2,
+                )) to Benefit(WEEK_DISCOUNT, WEEK_DISCOUNT_UNIT * 5),
+            )
+        }
+
+        @JvmStatic
+        fun createCheckWeekendDiscountValue(): List<Pair<OrderTicket, Benefit>> {
+            return listOf(
+                OrderTicket(hashMapOf(
+                    Menu.from("초코케이크")!! to 3,
+                    Menu.from("아이스크림")!! to 2,
+                    Menu.from("제로콜라")!! to 2,
+                )) to Benefit(WEEKEND_DISCOUNT, 0),
+                OrderTicket(hashMapOf(
+                    Menu.from("티본스테이크")!! to 2,
+                    Menu.from("아이스크림")!! to 2,
+                    Menu.from("제로콜라")!! to 2,
+                )) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 2),
+                OrderTicket(hashMapOf(
+                    Menu.from("티본스테이크")!! to 7,
+                    Menu.from("제로콜라")!! to 2,
+                )) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 7),
+                OrderTicket(hashMapOf(
+                    Menu.from("티본스테이크")!! to 4,
+                    Menu.from("바비큐립")!! to 2,
+                    Menu.from("제로콜라")!! to 2,
+                )) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 6),
+                OrderTicket(hashMapOf(
+                    Menu.from("티본스테이크")!! to 4,
+                    Menu.from("제로콜라")!! to 2,
+                    Menu.from("바비큐립")!! to 2,
+                    Menu.from("해산물파스타")!! to 1,
+                    Menu.from("크리스마스파스타")!! to 1,
+                )) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 8),
             )
         }
     }

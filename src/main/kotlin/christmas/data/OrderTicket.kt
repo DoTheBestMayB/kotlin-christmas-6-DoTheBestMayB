@@ -1,7 +1,7 @@
 package christmas.data
 
 data class OrderTicket(
-    val orderedMenu: HashMap<Menu, Int>,
+    val orderedMenu: LinkedHashMap<Menu, Int>,
 ) {
     fun totalOrderPrice(): Int {
         var totalPrice = 0

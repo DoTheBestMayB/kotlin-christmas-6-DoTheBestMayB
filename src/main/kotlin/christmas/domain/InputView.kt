@@ -29,7 +29,7 @@ class InputView(
     }
 
     private fun changeInputToMenu(input: String): OrderTicket {
-        val orderedMenu = hashMapOf<Menu, Int>()
+        val orderedMenu = linkedMapOf<Menu, Int>()
         var isNotOnlyDrink = false
 
         for (phrase in input.split(ORDER_INPUT_SPLITTER)) {

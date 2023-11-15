@@ -42,7 +42,7 @@ class PosTest {
                 // 17일 주문, 초코케이크-5,티본스테이크-1
                 ReceiptTestData(
                     orderTicket = OrderTicket(
-                        orderedMenu = hashMapOf(
+                        orderedMenu = linkedMapOf(
                             Menu.from("초코케이크")!! to 5,
                             Menu.from("티본스테이크")!! to 1,
                         ),
@@ -56,7 +56,7 @@ class PosTest {
                         EventManager.GIFT_EVENT, Menu.from(EventManager.GIFT_MENU_NAME)!!, EventManager.GIFT_AMOUNT
                     ),
                     receipt = Receipt(
-                        orderMenu = hashMapOf(
+                        orderMenu = linkedMapOf(
                             Menu.from("초코케이크")!! to 5,
                             Menu.from("티본스테이크")!! to 1,
                         ),
@@ -84,7 +84,7 @@ class PosTest {
                 // 19일 주문, 아이스크림-1,제로콜라-1
                 ReceiptTestData(
                     orderTicket = OrderTicket(
-                        orderedMenu = hashMapOf(
+                        orderedMenu = linkedMapOf(
                             Menu.from("아이스크림")!! to 1,
                             Menu.from("제로콜라")!! to 1,
                         ),
@@ -92,7 +92,7 @@ class PosTest {
                     priceDiscounts = listOf(),
                     gift = null,
                     receipt = Receipt(
-                        orderMenu = hashMapOf(
+                        orderMenu = linkedMapOf(
                             Menu.from("아이스크림")!! to 1,
                             Menu.from("제로콜라")!! to 1,
                         ),

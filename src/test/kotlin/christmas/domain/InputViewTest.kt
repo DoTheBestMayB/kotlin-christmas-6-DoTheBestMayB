@@ -218,14 +218,14 @@ class InputViewTest {
         @JvmStatic
         fun createValueForReadMenuSuccess() = listOf(
             "해산물파스타-2,레드와인-1,초코케이크-1" to OrderTicket(
-                hashMapOf(
+                linkedMapOf(
                     Menu.from("해산물파스타")!! to 2,
                     Menu.from("레드와인")!! to 1,
                     Menu.from("초코케이크")!! to 1,
                 )
             ),
             "양송이수프-5,티본스테이크-3,바비큐립-2,레드와인-1,초코케이크-1,아이스크림-1,샴페인-1" to OrderTicket(
-                hashMapOf(
+                linkedMapOf(
                     Menu.from("양송이수프")!! to 5,
                     Menu.from("티본스테이크")!! to 3,
                     Menu.from("바비큐립")!! to 2,

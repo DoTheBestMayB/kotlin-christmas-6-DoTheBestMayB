@@ -162,19 +162,19 @@ class EventManagerTest {
         fun createCheckWeekDiscountValue(): List<Pair<OrderTicket, Benefit>> {
             return listOf(
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("양송이수프")!! to 3,
                         Menu.from("제로콜라")!! to 2,
                     )
                 ) to Benefit(WEEK_DISCOUNT, 0),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("초코케이크")!! to 3,
                         Menu.from("제로콜라")!! to 2,
                     )
                 ) to Benefit(WEEK_DISCOUNT, WEEK_DISCOUNT_UNIT * 3),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("초코케이크")!! to 3,
                         Menu.from("아이스크림")!! to 2,
                         Menu.from("제로콜라")!! to 2,
@@ -187,34 +187,34 @@ class EventManagerTest {
         fun createCheckWeekendDiscountValue(): List<Pair<OrderTicket, Benefit>> {
             return listOf(
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("초코케이크")!! to 3,
                         Menu.from("아이스크림")!! to 2,
                         Menu.from("제로콜라")!! to 2,
                     )
                 ) to Benefit(WEEKEND_DISCOUNT, 0),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("티본스테이크")!! to 2,
                         Menu.from("아이스크림")!! to 2,
                         Menu.from("제로콜라")!! to 2,
                     )
                 ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 2),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("티본스테이크")!! to 7,
                         Menu.from("제로콜라")!! to 2,
                     )
                 ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 7),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("티본스테이크")!! to 4,
                         Menu.from("바비큐립")!! to 2,
                         Menu.from("제로콜라")!! to 2,
                     )
                 ) to Benefit(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT_UNIT * 6),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("티본스테이크")!! to 4,
                         Menu.from("제로콜라")!! to 2,
                         Menu.from("바비큐립")!! to 2,
@@ -229,29 +229,29 @@ class EventManagerTest {
         fun createCheckSpecialDiscountValue(): List<Pair<OrderTicket, Gift?>> {
             return listOf(
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("티본스테이크")!! to 2,
                         Menu.from("제로콜라")!! to 3,
                     )
                 ) to null,
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("아이스크림")!! to 20,
                     )
                 ) to null,
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("티본스테이크")!! to 2,
                         Menu.from("제로콜라")!! to 4,
                     )
                 ) to Gift(GIFT_EVENT, Menu.from(GIFT_MENU_NAME)!!, GIFT_AMOUNT),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("초코케이크")!! to 8,
                     )
                 ) to Gift(GIFT_EVENT, Menu.from(GIFT_MENU_NAME)!!, GIFT_AMOUNT),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("아이스크림")!! to 10,
                         Menu.from("양송이수프")!! to 9,
                         Menu.from("크리스마스파스타")!! to 1,
@@ -264,23 +264,23 @@ class EventManagerTest {
         fun createCanApplyEventValueTrue(): List<OrderTicket> {
             return listOf(
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("아이스크림")!! to 2,
                     )
                 ),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("아이스크림")!! to 1,
                         Menu.from("제로콜라")!! to 2,
                     )
                 ),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("타파스")!! to 2,
                     )
                 ),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("티본스테이크")!! to 4,
                         Menu.from("초코케이크")!! to 2,
                     )
@@ -292,30 +292,30 @@ class EventManagerTest {
         fun createCanApplyEventValueFalse(): List<OrderTicket> {
             return listOf(
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("아이스크림")!! to 1,
                     )
                 ),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("아이스크림")!! to 1,
                         Menu.from("제로콜라")!! to 1,
                     )
                 ),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("양송이수프")!! to 1,
                         Menu.from("제로콜라")!! to 1,
                     )
                 ),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("타파스")!! to 1,
                         Menu.from("제로콜라")!! to 1,
                     )
                 ),
                 OrderTicket(
-                    hashMapOf(
+                    linkedMapOf(
                         Menu.from("시저샐러드")!! to 1,
                     )
                 ),
